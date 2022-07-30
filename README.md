@@ -14,7 +14,7 @@ A aplicação permite criar e gerenciar em tempo real Chats privados com qualque
 - Firebase Firestore com Real Time updates
 e mais...
 
-###Funcionalidades
+### Funcionalidades
 
 - Autenticação de usuários
 - Cadastro de novos usuários
