@@ -6,6 +6,7 @@ A aplicação permite criar e gerenciar em tempo real Chats privados com qualque
 ### Stack
 
 - React Native
+- SectionList
 - Typescript
 - Expo Bare Workflow
 - Native Base
