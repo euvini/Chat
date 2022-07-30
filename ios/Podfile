@@ -33,6 +33,11 @@ target 'chatApp' do
   #   use_flipper!()
   # end
 
+     pod 'Firebase', :modular_headers => true
+     pod 'FirebaseCore', :modular_headers => true
+     pod 'GoogleUtilities', :modular_headers => true
+     $RNFirebaseAsStaticFramework = true
+
   post_install do |installer|
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
