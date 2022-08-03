@@ -1,4 +1,4 @@
-import { Heading, useTheme, KeyboardAvoidingView, IconButton, Toast } from 'native-base';
+import { Heading, useTheme, KeyboardAvoidingView, IInputProps, IconButton, Toast } from 'native-base';
 import { Input } from '../components/Input';
 import * as Icon from "phosphor-react-native";
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
@@ -83,8 +83,8 @@ export function SignIn() {
                         <IconButton
                             icon={
                                 showPassword === 'password'
-                                    ? <Icon.EyeClosed color={colors.gray[500]} size="26px" />
-                                    : <Icon.Eye color={colors.gray[500]} size="26px" />
+                                    ? <Icon.Eye color={colors.gray[500]} size="26px" />
+                                    : <Icon.EyeClosed color={colors.gray[500]} size="26px" />
                             }
                             borderRadius='full'
                             _pressed={{

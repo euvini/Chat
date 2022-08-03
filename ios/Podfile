@@ -13,7 +13,8 @@ target 'chatApp' do
   use_expo_modules!
   config = use_native_modules!
 
-  use_frameworks! :linkage => podfile_properties['ios.useFrameworks'].to_sym if podfile_properties['ios.useFrameworks']
+  use_frameworks! :linkage => :static
+  use_modular_headers!
 
   # Flags change depending on the env values.
   flags = get_default_flags()
@@ -33,10 +34,11 @@ target 'chatApp' do
   #   use_flipper!()
   # end
 
-     pod 'Firebase', :modular_headers => true
-     pod 'FirebaseCore', :modular_headers => true
-     pod 'GoogleUtilities', :modular_headers => true
-     $RNFirebaseAsStaticFramework = true
+  pod 'Firebase', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
+  pod 'FirebaseStorage', :modular_headers => true
+  pod 'GoogleUtilities', :modular_headers => true
+  $RNFirebaseAsStaticFramework = true
 
   post_install do |installer|
     react_native_post_install(installer)

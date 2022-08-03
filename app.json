@@ -6,6 +6,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "plugins": [
+      "expo-image-picker"
+    ],
     "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": [
@@ -21,6 +24,15 @@
         "wasm",
         "svg"
       ]
+    },
+    "android": {
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.chatApp"
+    },
+    "ios": {
+      "bundleIdentifier": "com.chatapp"
     }
   },
   "name": "chatApp"

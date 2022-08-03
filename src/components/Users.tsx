@@ -25,7 +25,7 @@ export default function Users({ data, ...rest }: Props) {
             maxHeight={130}
             {...rest}  >
             <VStack justifyContent='center' alignItems='center' my={2}>
-                <Avatar size='lg' />
+                <Avatar size='lg' source={{uri: data.photo}} />
                 <Text fontSize={14} maxW='32' mt={2} color='white'>{data.name}</Text>
             </VStack>
         </Pressable>

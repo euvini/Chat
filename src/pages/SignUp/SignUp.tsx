@@ -1,10 +1,10 @@
 import { Heading, useTheme, KeyboardAvoidingView, IconButton, Toast } from 'native-base';
-import { Input } from '../components/Input';
+import { Input } from '../../components/Input';
 import * as Icon from "phosphor-react-native";
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useState } from 'react';
-import Logo from "../assets/logo_primary.svg"
-import Button from '../components/Buttom';
+import Logo from "../../assets/logo_primary.svg"
+import Button from '../../components/Buttom';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore';
@@ -20,7 +20,7 @@ export function SignUp() {
     const [password, setPassword] = useState('')
     const [confirmation, setConfirmation] = useState('')
 
-    function handleCreateUser() {
+    function willGetAvatar() {
         if (!email || !password) {
             return Toast.show({
                 title: 'Preencha todos os campos',
@@ -33,45 +33,11 @@ export function SignUp() {
                 backgroundColor: 'red.900'
             })
         }
-        setIsLoading(true)
-        auth().createUserWithEmailAndPassword(email, password)
-            .catch((e) => {
-                setIsLoading(false)
-                if (e.code === 'auth/invalid-email') {
-                    return Toast.show({
-                        title: 'E-mail informado não é válido',
-                        backgroundColor: 'red.900'
-                    })
-                }
-                if (e.code === 'auth/email-already-in-use') {
-                    return Toast.show({
-                        title: 'E-mail já está em uso',
-                        backgroundColor: 'red.900'
-                    })
-                }
-                if (e.code === 'auth/weak-password') {
-                    return Toast.show({
-                        title: 'Senha fraca, digite uma senha maior de no mínimo 6 números',
-                        backgroundColor: 'red.900'
-                    })
-                }
-            }).then((res) => {
-                console.log(res.user.uid)
-                firestore()
-                    .collection('users')
-                    .doc(res.user.uid)
-                    .set({
-                        name,
-                        email,
-                        uid: res.user.uid
-                    })
-                    .then(() => {
-                        return Toast.show({
-                            title: 'Usuário registrado',
-                            backgroundColor: 'green.900'
-                        })
-                    })
-            })
+        navigation.navigate('getAvatar', {
+            name: name,
+            email: email,
+            password: password
+        })
     }
 
     return (
@@ -110,8 +76,8 @@ export function SignUp() {
                         <IconButton
                             icon={
                                 showPassword === 'password'
-                                    ? <Icon.EyeClosed color={colors.gray[500]} size="26px" />
-                                    : <Icon.Eye color={colors.gray[500]} size="26px" />
+                                    ? <Icon.Eye color={colors.gray[500]} size="26px" />
+                                    : <Icon.EyeClosed color={colors.gray[500]} size="26px" />
                             }
                             borderRadius='full'
                             _pressed={{
@@ -131,8 +97,8 @@ export function SignUp() {
                         <IconButton
                             icon={
                                 showPassword === 'password'
-                                    ? <Icon.EyeClosed color={colors.gray[500]} size="26px" />
-                                    : <Icon.Eye color={colors.gray[500]} size="26px" />
+                                    ? <Icon.Eye color={colors.gray[500]} size="26px" />
+                                    : <Icon.EyeClosed color={colors.gray[500]} size="26px" />
                             }
                             borderRadius='full'
                             _pressed={{
@@ -144,7 +110,8 @@ export function SignUp() {
                 <Button
                     title='Ok'
                     mt={5}
-                    onPress={handleCreateUser}
+                    //onPress={handleCreateUser}
+                    onPress={willGetAvatar}
                     isLoading={isLoading}
                 />
                 <Button

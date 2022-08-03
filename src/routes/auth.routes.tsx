@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { SignIn } from '../pages/SignIn';
-import { SignUp } from '../pages/SignUp';
+import { GetAvatar } from '../pages/SignUp/GetAvatar';
+import { SignUp } from '../pages/SignUp/SignUp';
 
 export function AuthRoutes() {
     const { Navigator, Screen } = createNativeStackNavigator()
@@ -17,6 +18,10 @@ export function AuthRoutes() {
             <Screen
                 name='signUp'
                 component={SignUp}
+            />
+            <Screen
+                name='getAvatar'
+                component={GetAvatar}
             />
         </Navigator>
     );

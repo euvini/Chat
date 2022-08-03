@@ -4,9 +4,10 @@ import * as Icon from "phosphor-react-native";
 type Props = IInputProps & {
     onPressSend: () => void
     onPressOptions: () => void
+    rightElement: any
 }
 
-export function Bottom({ onPressSend, onPressOptions, ...rest }: Props) {
+export function Bottom({ onPressSend, onPressOptions, rightElement, ...rest }: Props) {
     return (
         <HStack
             w='full'
@@ -39,6 +40,7 @@ export function Bottom({ onPressSend, onPressOptions, ...rest }: Props) {
                     borderColor: 'gray.500',
                     bg: 'gray.700'
                 }}
+                rightElement={rightElement}
                 {...rest}
             />
             <Button

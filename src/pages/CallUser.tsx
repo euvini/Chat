@@ -6,11 +6,13 @@ import Users, { UsersProps } from '../components/Users';
 import { Header } from '../components/Header';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
+import * as Icon from "phosphor-react-native";
 
 export function CallUser() {
     const [data, setData] = useState<UsersProps[]>([])
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+    const [photo, setPhoto] = useState('')
 
     const uid = auth().currentUser.uid
     const navigation = useNavigation()
@@ -23,6 +25,7 @@ export function CallUser() {
                 const data = snapshot.data()
                 setName(data.name)
                 setEmail(data.email)
+                setPhoto(data.avatar)
             })
         return mydata
     })
@@ -33,23 +36,23 @@ export function CallUser() {
             .where('uid', '!=', uid)
             .onSnapshot(snapshot => {
                 const data = snapshot.docs.map(doc => {
-                    const { name, email, uid } = doc.data()
+                    const { name, email, uid, avatar } = doc.data()
                     return {
                         id: doc.id,
                         name,
                         email,
-                        uid
+                        uid,
+                        photo: avatar
                     }
                 })
                 setData(data)
-                //console.log(data[0])
             })
         return subscriber;
     }, [])
 
     return (
         <VStack bg='gray.800' flex={1} >
-            <Header title='New' onPress={() => { }} />
+            <Header title='New' onPress={() => navigation.goBack()} actionIcon={<Icon.CaretLeft color='white' size="26px" />} />
             <VStack flex={1} mt={4} alignItems='center' >
                 <FlatList
                     data={data}
@@ -71,9 +74,11 @@ export function CallUser() {
                                                 name1: name,
                                                 email1: email,
                                                 uid1: uid,
+                                                photo1: photo,
                                                 name2: item.name,
                                                 email2: item.email,
                                                 uid2: item.uid,
+                                                photo2: item.photo,
                                                 createdAt: firestore.FieldValue.serverTimestamp()
                                             }).catch((e) => {
                                                 console.log(e)

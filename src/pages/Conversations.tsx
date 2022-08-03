@@ -1,8 +1,7 @@
-import { Avatar, FlatList, HStack, IconButton, Pressable, Text, useNativeBase, VStack } from 'native-base';
+import { AlertDialog, FlatList, IconButton, VStack } from 'native-base';
 import * as Icon from "phosphor-react-native";
-import { ReactChild, ReactFragment, ReactPortal, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
-import { conversations } from '../services/fakeCvs';
 import auth from '@react-native-firebase/auth'
 import { CardConversation } from '../components/CardConversation';
 import firestore from '@react-native-firebase/firestore'
@@ -24,15 +23,17 @@ export function Conversations() {
             .where('participants', 'array-contains', uid)
             .onSnapshot(snapshot => {
                 const data = snapshot.docs.map(doc => {
-                    const { name1, participants, email1, uid1, name2, email2, uid2 } = doc.data()
+                    const { name1, participants, email1, uid1, photo1, name2, email2, uid2, photo2 } = doc.data()
                     return {
                         participants,
                         name1,
                         email1,
                         uid1,
+                        photo1,
                         name2,
                         email2,
                         uid2,
+                        photo2,
                         docId: doc.id
                     }
                 })
@@ -49,6 +50,7 @@ export function Conversations() {
                 onPress={() => {
                     navigation.navigate('calluser', { data: data })
                 }}
+                actionIcon={<Icon.Plus color='white' size="26px" />}
             />
             <VStack flex={1} pb={15} >
                 <FlatList
@@ -69,6 +71,7 @@ export function Conversations() {
                 _pressed={{
                     bg: 'green.800'
                 }} />
+
         </VStack>
     );
 }
