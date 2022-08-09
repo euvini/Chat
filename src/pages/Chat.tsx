@@ -1,8 +1,8 @@
-import { Button as ButtonNativeBase, VStack, KeyboardAvoidingView, SectionList, Box, IconButton, AlertDialog, Toast } from 'native-base';
+import { Button as ButtonNativeBase, VStack, KeyboardAvoidingView, SectionList, Box, IconButton, AlertDialog, Toast, Text, Divider, HStack } from 'native-base';
 import { Platform } from 'react-native';
 import uuid from 'react-native-uuid'
 import React, { useEffect, useState } from 'react';
-import { Bottom } from '../components/Bottom';
+import { Bottom } from '../components/BottomChat';
 import { HeaderChat } from '../components/HeaderChat';
 import auth from '@react-native-firebase/auth'
 import groupBy from 'lodash/groupBy'
@@ -195,15 +195,19 @@ export function Chat() {
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => <Message data={item} />}
                     renderSectionHeader={({ section: { title } }) => (
-                        <VStack py={5}>
-                            <Box py={1} px={2} bg='gray.600' alignSelf='center' rounded='xl' >{title}</Box>
+                        <VStack py={2} alignItems='center' px={4}>
+                            <HStack alignItems='center'>
+                                <Icon.ArrowUp style={{marginRight: 10}} color='white' size={12} />
+                                <Text color='gray.500' fontSize={12} >{title}</Text>
+                                <Icon.ArrowUp style={{marginLeft: 10}} color='white' size={12} />
+                            </HStack>
+                            <Divider borderWidth={0.5} />
                         </VStack>
                     )}
                     showsVerticalScrollIndicator={false}
                 />
             </VStack>
             <Bottom
-                placeholder='Digite sua mensagem...'
                 value={text}
                 onChangeText={setText}
                 onPressSend={onSend}

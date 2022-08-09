@@ -20,6 +20,7 @@ export function CardConversation({ data, ...rest }) {
             .doc(data.docId)
             .delete()
             .then(() => {
+                onClose()
                 return Toast.show({
                     title: 'Deletado'
                 })

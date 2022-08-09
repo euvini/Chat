@@ -58,4 +58,3 @@ export async function uploadImageAsync(uri: string, path: any, fName?: any) {
 
     return { url };
 }
-
